@@ -1,0 +1,30 @@
+# NGINX config for 404 and 500 error pages
+server {
+
+	listen 80;
+	server_name localhost ;
+	root /usr/share/nginx/gameOfThrones;
+	index index.html;
+
+	location / {
+
+		try_files $uri $uri/ =404;
+	}
+
+	#error page 404
+
+	error_page 404 /404.html;
+	location = /404.html {
+		root /usr/share/nginx/html;
+		internal;
+	}
+
+	#error page 500
+
+	error_page 500 502 503 504 /50x.html;
+	location = /50x.html {
+		root /usr/share/nginx/gameOfThrones;
+		internal;
+	}
+}				
+	
